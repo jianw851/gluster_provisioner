@@ -1,0 +1,56 @@
+{
+  "clusters": [
+    {
+      "nodes": [
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "node1"
+              ],
+              "storage": [
+                "xxx.xxx.xxx.xxx"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sda2"
+          ]
+        },
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "node2"
+              ],
+              "storage": [
+                "xxx.xxx.xxx.xxx"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sda2"
+          ]
+        },
+        {
+          "node": {
+            "hostnames": {
+              "manage": [
+                "node3"
+              ],
+              "storage": [
+                "xxx.xxx.xxx.xxx"
+              ]
+            },
+            "zone": 1
+          },
+          "devices": [
+            "/dev/sda2"
+          ]
+        }
+      ]
+    }
+  ]
+}

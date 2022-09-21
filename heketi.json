@@ -1,0 +1,37 @@
+{
+  "_port_comment": "Heketi Server Port Number",
+  "port": "8080",
+  "_use_auth": "Enable JWT authorization.",
+  "use_auth": false,
+  "_jwt": "Private keys for access",
+  "jwt": {
+    "_admin": "Admin has access to all APIs",
+    "admin": {
+      "key": "adminsecretkey"
+    }
+  },
+  "_glusterfs_comment": "GlusterFS Configuration",
+  "glusterfs": {
+    "executor": "ssh",
+    "_sshexec_comment": "SSH username and private key file",
+    "sshexec": {
+      "keyfile": "/heketi/id_rsa",
+      "user": "username",
+      "port": "22"
+    },
+
+   "_kubeexec_comment": "Kubernetes configuration",
+    "kubeexec": {
+      "host" :"https://xxx.xxx.xxx.xxx:6443",
+      "cert" : "/xxx/xx.crt",
+      "insecure": false,
+      "user": "",
+      "password": "",
+      "namespace": ""
+    },
+
+    "_db_comment": "Database file name",
+    "db": "/var/lib/heketi/heketi.db",
+    "loglevel" : "debug"
+  }
+}

@@ -35,7 +35,7 @@ kubectl create secret generic heketi-ssh-key-file \
   --from-file=/mnt/heketi/.ssh/id_rsa
 ```
 
-## create heketi config.json file
+## create heketi.json file
 
 ```
 {

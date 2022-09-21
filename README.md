@@ -1,5 +1,9 @@
 # Steps to install gluster cluster on on-prem k8s
 
+The purpose of this repo is to create a on-prem gluster cluster, that used for dynamic storage provisioning. 
+
+The installation includes gluster part and heketi part. The later one is instructed in heketi_readme.md file.
+
 ## 1. install gluster server on all storage nodes
 
 ```
@@ -137,4 +141,53 @@ kubectl exec POD-NAME -- heketi-cli \
   cluster list
 Clusters:
 Id:c63d60ee0ddf415097f4eb82d69f4e48 [file][block]
+
+kubectl get svc 
+To see the ip and port
+```
+
+### Test
+
+
+#### Create storage class
+
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: live-glusterfs
+  labels:
+    storage.k8s.io/name: glusterfs
+    storage.k8s.io/provisioner: heketi
+    storage.k8s.io/created-by: liveget
+provisioner: kubernetes.io/glusterfs
+parameters:
+  resturl: http://<svc ip>:<svc port>
+  clusterid: c63d60ee0ddf415097f4eb82d69f4e48
+  restauthenabled: !!str true
+  restuser: admin
+  secretNamespace: default
+  secretName: heketi-admin-secret
+  volumetype: replicate:3
+```
+
+#### Create PersistenVolumeClaim to test dynamic provisioning
+
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-vol
+  labels:
+    storage.k8s.io/name: glusterfs
+    storage.k8s.io/provisioner: heketi
+    storage.k8s.io/created-by: liveget
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: live-glusterfs
+  resources:
+    requests:
+      storage: 10Gi
 ```
